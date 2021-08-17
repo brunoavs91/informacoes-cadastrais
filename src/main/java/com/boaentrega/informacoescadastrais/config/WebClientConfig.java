@@ -3,16 +3,35 @@ package com.boaentrega.informacoescadastrais.config;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.net.http.HttpHeaders;
 
 @Configuration
 public class WebClientConfig {
 
     @Bean
     @LoadBalanced
-    public WebClient.Builder loadBalancedWebClientBuilder() {
-        return WebClient.builder();
+    public WebClient webClientBuilderClient() {
+       return WebClient
+                .builder()
+               // .defaultHeader(org.apache.http.HttpHeaders.AUTHORIZATION, "Bearer " + generateToken())
+                .build();
     }
+
+//    public String generateToken() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication == null) {
+//            return null;
+//        }
+//
+//        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) authentication.getDetails();
+//        return details.getTokenValue();
+//
+//    }
 
 
     /**
@@ -34,7 +53,7 @@ public class WebClientConfig {
 
 
 //    @Autowired
-//    private WebClient.Builder webClientBuilder;
+//    private WebClient webClientBuilder;
 //
 //    @Autowired
 //    @LoadBalanced
