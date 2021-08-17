@@ -5,6 +5,7 @@ import com.boaentrega.informacoescadastrais.config.WebClientConfig;
 import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
@@ -14,14 +15,13 @@ import org.springframework.stereotype.Service;
 public class ServicoClienteImpl implements ServicoCliente {
 
     @Autowired
-    @LoadBalanced
     private WebClientConfig client;
 
     @Override
     public String getTesteClient() {
         return  client.webClientBuilderClient()
                 .get()
-                .uri("servico-cliente/teste2")
+                .uri("localhost:8083/teste2")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + generateToken())
                 .retrieve()
                 .bodyToMono(String.class).block();
