@@ -1,5 +1,6 @@
 package com.boaentrega.informacoescadastrais.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

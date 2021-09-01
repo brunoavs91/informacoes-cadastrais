@@ -12,6 +12,8 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Autowired
     private FornecedorRepository repository;
 
+
+
     @Override
     public Fornecedor getFornecedorByEstado(String estado) {
         return repository.findByEstado(estado);

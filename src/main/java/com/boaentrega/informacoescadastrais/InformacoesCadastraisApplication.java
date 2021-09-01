@@ -13,16 +13,11 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 public class InformacoesCadastraisApplication {
 
+    public  static  void teste(){
+
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(InformacoesCadastraisApplication.class, args);
     }
-
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
-
 }
