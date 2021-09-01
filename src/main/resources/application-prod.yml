@@ -1,0 +1,26 @@
+
+spring:
+  application:
+    name: 'informacoes-cadastrais'
+  datasource:
+    password: 'ha942bqv0eh4dljk'
+    username: 'kyrr5pxyb5evad17'
+    url: jdbc:mysql://uyu7j8yohcwo35j3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/gansb3kowjz45sa7
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: https://eureka-server-boa-entrega.herokuapp.com/eureka
+
+security:
+  oauth2:
+    resource:
+      user-info-uri:  https://api-server-authenticate.herokuapp.com/user
