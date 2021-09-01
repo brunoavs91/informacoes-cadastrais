@@ -25,9 +25,9 @@ public class Pedido {
     @JoinColumn(name = "pedidoId")
     private List<ItemPedido> itens;
 
-    public Pedido(List<ItemPedido> itens) {
-        this.itens = itens;
-        this.status = StatusPedido.RECEBIDO;
-    }
+//    public Pedido(List<ItemPedido> itens) {
+//        this.itens = itens;
+//        this.status = StatusPedido.RECEBIDO;
+//    }
 
 }

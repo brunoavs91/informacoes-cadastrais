@@ -12,7 +12,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class ItemPedido {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
