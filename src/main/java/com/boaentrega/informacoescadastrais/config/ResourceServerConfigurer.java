@@ -13,4 +13,5 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
                 .anyRequest()
                 .authenticated();
     }
+
 }
