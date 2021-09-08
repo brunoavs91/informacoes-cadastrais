@@ -26,14 +26,21 @@ public class FornecedorServiceImpl implements FornecedorService {
 
     @Override
     public FornecedorDTO salvarFornecedor(FornecedorDTO dto) {
-        Fornecedor fornecedor = Fornecedor.builder()
-                .nome(dto.getNome())
-                .endereco(dto.getEndereco()).estado(dto.getEstado().toUpperCase()).build();
+        Fornecedor fornecedor = fromEntity(dto);
         fornecedor = repository.save(fornecedor);
+        return fromDTO(fornecedor);
+    }
+
+    public FornecedorDTO fromDTO(Fornecedor fornecedor){
         return FornecedorDTO.builder().id(fornecedor.getId())
                 .endereco(fornecedor.getEndereco())
                 .nome(fornecedor.getNome()).estado(fornecedor.getEstado()).build();
     }
 
+    public Fornecedor fromEntity(FornecedorDTO dto){
+        return Fornecedor.builder()
+                .nome(dto.getNome())
+                .endereco(dto.getEndereco()).estado(dto.getEstado().toUpperCase()).build();
+    }
 
 }
