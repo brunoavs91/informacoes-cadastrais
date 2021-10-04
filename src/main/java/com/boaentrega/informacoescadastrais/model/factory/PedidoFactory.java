@@ -18,7 +18,7 @@ public class PedidoFactory {
 
         return PedidoDTO.builder().id(pedido.getId())
                 .status(pedido.getStatus().name())
-                .tempoDePreparo(pedido.getTempoDePreparo())
+                .localizacao(pedido.getLocalizacao())
                 .itens(fromListDTO(pedido.getItens())).build();
 
     }
@@ -26,7 +26,7 @@ public class PedidoFactory {
     public static Pedido fromEntity(PedidoDTO pedidoDTO){
         return Pedido.builder().id(pedidoDTO.getId())
                 .status(StatusPedido.valueOf(pedidoDTO.getStatus()))
-                .tempoDePreparo(pedidoDTO.getTempoDePreparo())
+                .localizacao(pedidoDTO.getLocalizacao())
                 .itens(fromListEntity(pedidoDTO.getItens())).build();
     }
 

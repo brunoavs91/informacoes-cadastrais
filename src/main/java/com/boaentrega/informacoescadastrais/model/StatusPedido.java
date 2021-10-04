@@ -1,5 +1,5 @@
 package com.boaentrega.informacoescadastrais.model;
 
 public enum StatusPedido {
-    RECEBIDO, PRONTO, ENVIADO;
+    RECEBIDO, PRONTO,EM_ANDAMENTO, ENVIADO;
 }

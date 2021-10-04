@@ -4,20 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class PedidoDTO {
+public class PedidoStatus {
 
-    private Long id;
-
-    private String localizacao;
+    @Id
+    private Long numeroPedido;
 
     private String status;
 
-    private List<ItemPedidoDTO> itens;
-
+    private String localizacao;
 }
+
