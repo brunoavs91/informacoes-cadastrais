@@ -33,7 +33,7 @@ cloud:
       static: us-east-1
       auto: false
     credentials:
-      access-key: AKIARZ3CJKRA3YMDEYMX
-      secret-key: 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
+      access-key: <>
+      secret-key: <>
     end-point:
       uri: https://sqs.us-east-1.amazonaws.com/124223312961/criar_pedido_status
