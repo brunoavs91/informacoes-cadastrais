@@ -20,7 +20,7 @@ public class ItemPedido {
 
     private Integer quantidade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "produtoId")
     private Produto produto;
 

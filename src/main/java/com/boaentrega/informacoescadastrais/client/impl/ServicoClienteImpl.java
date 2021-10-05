@@ -11,12 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.context.annotation.Primary;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -42,7 +37,7 @@ public class ServicoClienteImpl implements ServicoCliente {
 
     @Override
     public String getTesteClient() {
-        return  client.webClientBuilderClient()
+        return client.webClientBuilderClient()
                 .get()
                 .uri("localhost:8083/teste2")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + securityService.getToken())

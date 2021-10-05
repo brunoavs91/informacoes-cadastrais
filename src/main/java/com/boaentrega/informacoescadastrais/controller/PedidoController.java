@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/pedido")
 public class PedidoController {
@@ -21,7 +23,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity salvarPedido(@RequestBody PedidoDTO pedidoDTO){
+    public ResponseEntity salvarPedido(@RequestBody PedidoDTO pedidoDTO) throws IOException {
 
         return ResponseEntity.ok().body(service.salvarPedido(pedidoDTO));
     }
