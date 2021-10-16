@@ -5,6 +5,7 @@ import com.boaentrega.informacoescadastrais.model.dto.FornecedorDTO;
 import com.boaentrega.informacoescadastrais.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +19,14 @@ public class FornecedorController {
     private FornecedorService service;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER_COLAB') or hasAuthority('USER_CLIENT')")
     public ResponseEntity getFornecedor(@RequestParam String nome){
 
        return ResponseEntity.ok().body(service.getFornecedorByEstado(nome));
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('USER_COLAB')")
     public ResponseEntity salvarFornecedor(@RequestBody FornecedorDTO fornecedorDTO){
 
         return ResponseEntity.ok().body(service.salvarFornecedor(fornecedorDTO));

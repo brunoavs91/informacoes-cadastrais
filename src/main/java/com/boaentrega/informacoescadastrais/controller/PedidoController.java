@@ -5,6 +5,7 @@ import com.boaentrega.informacoescadastrais.model.dto.PedidoDTO;
 import com.boaentrega.informacoescadastrais.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -17,12 +18,14 @@ public class PedidoController {
   private PedidoService service;
 
     @GetMapping
-    public ResponseEntity getFornecedor(@RequestParam Long id){
+    @PreAuthorize("hasAuthority('USER_COLAB') or hasAuthority('ADMIN_CLIENT')")
+    public ResponseEntity getPedido(@RequestParam Long id){
 
         return ResponseEntity.ok().body(service.buscarPedido(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('USER_COLAB') or hasAuthority('ADMIN_CLIENT')")
     public ResponseEntity salvarPedido(@RequestBody PedidoDTO pedidoDTO) throws IOException {
 
         return ResponseEntity.ok().body(service.salvarPedido(pedidoDTO));

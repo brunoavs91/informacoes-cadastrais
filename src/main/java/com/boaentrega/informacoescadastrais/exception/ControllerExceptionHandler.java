@@ -2,6 +2,7 @@ package com.boaentrega.informacoescadastrais.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -23,5 +24,12 @@ public class ControllerExceptionHandler {
 
         StandardError erro = new StandardError(System.currentTimeMillis(), HttpStatus.EXPECTATION_FAILED.value(), "Algum erro aconteceu", ex.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(erro);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<StandardError> objectNotFound(AccessDeniedException ex, HttpServletRequest request) {
+
+        StandardError erro = new StandardError(System.currentTimeMillis(), HttpStatus.UNAUTHORIZED.value(), "Algum erro aconteceu", ex.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(erro);
     }
 }
