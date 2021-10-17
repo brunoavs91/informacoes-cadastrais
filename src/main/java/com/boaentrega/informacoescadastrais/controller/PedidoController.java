@@ -30,4 +30,11 @@ public class PedidoController {
 
         return ResponseEntity.ok().body(service.salvarPedido(pedidoDTO));
     }
+
+  @PutMapping
+  @PreAuthorize("hasAuthority('USER_COLAB') or hasAuthority('ADMIN_CLIENT')")
+  public ResponseEntity atualizar(@RequestBody PedidoDTO pedidoDTO) throws IOException {
+
+    return ResponseEntity.ok().body(service.atualizarPedido(pedidoDTO));
+  }
 }

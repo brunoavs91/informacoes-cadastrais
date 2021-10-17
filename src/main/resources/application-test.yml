@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 server:
   port: 8081
@@ -34,6 +34,7 @@ cloud:
       auto: false
     credentials:
       access-key: <>
-      secret-key: <>
+        secret-key: <>
     end-point:
-      uri: https://sqs.us-east-1.amazonaws.com/124223312961/criar_pedido_status
+      uri-criar: https://sqs.us-east-1.amazonaws.com/124223312961/criar_pedido_status
+      uri-atualizar: https://sqs.us-east-1.amazonaws.com/124223312961/atualizar_pedido_status

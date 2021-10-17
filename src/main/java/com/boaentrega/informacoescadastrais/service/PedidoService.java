@@ -10,4 +10,6 @@ public interface PedidoService {
     Pedido buscarPedido(Long id);
 
     PedidoDTO salvarPedido(PedidoDTO pedidoDTO) throws IOException;
+
+    PedidoDTO atualizarPedido(PedidoDTO pedidoDTO) throws IOException;
 }

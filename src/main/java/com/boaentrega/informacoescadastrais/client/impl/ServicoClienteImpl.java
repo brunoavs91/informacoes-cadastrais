@@ -30,8 +30,11 @@ public class ServicoClienteImpl implements ServicoCliente {
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
-    @Value("${cloud.aws.end-point.uri}")
-    private String endPoint;
+    @Value("${cloud.aws.end-point.uri-criar}")
+    private String filaCriar;
+
+    @Value("${cloud.aws.end-point.uri-atualizar}")
+    private String filaAtualizar;
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -46,10 +49,14 @@ public class ServicoClienteImpl implements ServicoCliente {
     }
 
     @Override
-    public void enviarPedidoStatus(PedidoStatus pedidoStatus) throws IOException {
+    public void enviarPedidoStatus(PedidoStatus pedidoStatus, Boolean atualizar) throws IOException {
         log.info("Enviando mensagem para a fila");
         String msg = mapper.writeValueAsString(pedidoStatus);
-        queueMessagingTemplate.send(endPoint, MessageBuilder.withPayload(msg).build());
+        if (atualizar) {
+            queueMessagingTemplate.send(filaAtualizar, MessageBuilder.withPayload(msg).build());
+        } else {
+            queueMessagingTemplate.send(filaCriar, MessageBuilder.withPayload(msg).build());
+        }
         log.info("mensagem enviada");
     }
 

@@ -1,14 +1,11 @@
 package com.boaentrega.informacoescadastrais.controller;
 
-import com.boaentrega.informacoescadastrais.model.Fornecedor;
 import com.boaentrega.informacoescadastrais.model.dto.FornecedorDTO;
 import com.boaentrega.informacoescadastrais.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/fornecedor")
@@ -20,9 +17,9 @@ public class FornecedorController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('USER_COLAB') or hasAuthority('USER_CLIENT')")
-    public ResponseEntity getFornecedor(@RequestParam String nome){
+    public ResponseEntity getFornecedor(@RequestParam String estado){
 
-       return ResponseEntity.ok().body(service.getFornecedorByEstado(nome));
+       return ResponseEntity.ok().body(service.getFornecedorByEstado(estado));
     }
 
     @PostMapping

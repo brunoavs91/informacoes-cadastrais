@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 public class PedidoServiceImpl implements PedidoService {
 
@@ -34,17 +36,29 @@ public class PedidoServiceImpl implements PedidoService {
     public PedidoDTO salvarPedido(PedidoDTO pedidoDTO) {
         Pedido pedido = PedidoFactory.fromEntity(pedidoDTO);
         pedido = repository.save(pedido);
-        enviarPedidoServicoCliente(PedidoStatus.builder().numeroPedido(pedido.getId())
-                .status(pedido.getStatus().name())
-                .localizacao(pedido.getLocalizacao())
-                .build());
+        enviarPedidoServicoCliente(getPedidoStatus(pedido), false);
         return PedidoFactory.fromDTO(pedido);
     }
 
-    private void enviarPedidoServicoCliente(PedidoStatus pedidoStatus) {
+    private PedidoStatus getPedidoStatus(Pedido pedido) {
+        return PedidoStatus.builder().numeroPedido(pedido.getId())
+                .status(pedido.getStatus().name())
+                .localizacao(pedido.getLocalizacao())
+                .build();
+    }
+
+    @Override
+    public PedidoDTO atualizarPedido(PedidoDTO pedidoDTO) throws IOException {
+        Pedido pedido = PedidoFactory.fromEntity(pedidoDTO);
+        pedido = repository.save(pedido);
+        enviarPedidoServicoCliente(getPedidoStatus(pedido), true);
+        return PedidoFactory.fromDTO(pedido);
+    }
+
+    private void enviarPedidoServicoCliente(PedidoStatus pedidoStatus, Boolean atualizar) {
         try {
             log.info("Enviando pedido :{} para a fila", pedidoStatus.getNumeroPedido());
-            servicoCliente.enviarPedidoStatus(pedidoStatus);
+            servicoCliente.enviarPedidoStatus(pedidoStatus, atualizar);
 
         } catch (Exception exception) {
             log.error("Falha ao tentar enviar a mensagem para a fila , erro : {}",exception.getMessage());

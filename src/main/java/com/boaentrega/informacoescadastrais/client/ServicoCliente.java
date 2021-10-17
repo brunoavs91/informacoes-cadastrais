@@ -7,6 +7,6 @@ import java.io.IOException;
 public interface ServicoCliente {
 
      String getTesteClient();
-     void enviarPedidoStatus(PedidoStatus pedidoStatus) throws IOException;
+     void enviarPedidoStatus(PedidoStatus pedidoStatus, Boolean atualizar) throws IOException;
 
 }
